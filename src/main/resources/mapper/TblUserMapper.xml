@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fjcpc.zzx.mapper.TblUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.fjcpc.zzx.pojo.TblUser">
+        <id property="uid" column="uid" jdbcType="OTHER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="truename" column="trueName" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+        <result property="telephone" column="telephone" jdbcType="VARCHAR"/>
+        <result property="birth" column="birth" jdbcType="VARCHAR"/>
+        <result property="balance" column="balance" jdbcType="DOUBLE"/>
+        <result property="role" column="role" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        uid
+        ,username,password,
+        trueName,sex,telephone,
+        birth,balance,role,
+        regtime
+    </sql>
+
+    <select id="login" resultType="com.fjcpc.zzx.pojo.TblUser">
+        select *
+        from tbl_user
+        where username = #{username} and password = #{password}
+    </select>
+</mapper>

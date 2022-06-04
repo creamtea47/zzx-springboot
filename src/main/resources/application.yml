@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml # mapper映射文件的路径
+  configuration:
+    map-underscore-to-camel-case: true # 驼峰命名规范
+  type-aliases-package: com.example.springboothelloworld.pojo # 指定别名设置的包为所有的pojo
+

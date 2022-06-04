@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-boot-helloworld?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password:
+    hikari:
+      maximum-pool-size: 10 # 最大连接池数
+      max-lifetime: 1770000 # ⽤来设置⼀个connection在连接池中的存活时间，默认是1800000，即30分钟。如果设置为0，表⽰存活时间⽆限
+logging:
+  config: classpath:logback.xml
+  level:
+    com.example.springboothelloworld: debug # ERROR、WARN、INFO、DEBUG
+friend:
+  name: 卢昂${random.int}
+  age: 20
+  happy: true
+  birth: 2001/08/29
+  maps: { k1: v1,k2: v2 }
+  lists:
+    - code
+    - music
+    - 李广月
+  friends:
+    friendName: 目目
+    friendAge: 20
+    sex: 男
+# 配置多个微服务的地址
+url:
+  # 订单微服务的地址
+  orderUrl: http://localhost:8002
+  # 用户微服务的地址
+  userUrl: http://localhost:8003
+  # 购物车微服务的地址
+  shoppingUrl: http://localhost:8004
