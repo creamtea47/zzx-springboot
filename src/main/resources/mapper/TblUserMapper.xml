@@ -27,6 +27,71 @@
     <select id="login" resultType="com.fjcpc.zzx.pojo.TblUser">
         select *
         from tbl_user
-        where username = #{username} and password = #{password}
+        where username = #{username}
+          and password = #{password}
     </select>
+
+    <select id="register" resultType="com.fjcpc.zzx.pojo.TblUser">
+        INSERT INTO tbl_user (`username`, `password`, `trueName`, `sex`, `telephone`, `birth`, `balance`,
+                              `regtime`, `role`)
+        VALUES (#{username}, #{password}, #{truename}, #{sex}, #{telephone}, #{birth}, #{balance}, #{regtime}, #{role})
+    </select>
+
+    <select id="getInfoByUsername" resultType="com.fjcpc.zzx.pojo.TblUser">
+        select *
+        from tbl_user
+        where username = #{username}
+    </select>
+
+    <select id="getInfoByUid" resultType="com.fjcpc.zzx.pojo.TblUser">
+        select *
+        from tbl_user
+        where uid = #{uid}
+    </select>
+
+    <delete id="delUserByUid">
+        DELETE
+        FROM tbl_user
+        WHERE uid = #{uid}
+    </delete>
+
+    <update id="updateInfo">
+        UPDATE `zzx-data`.`tbl_user`
+        <if test="#{username} != null">
+            SET `username` = #{username},
+        </if>
+        <if test="#{password} != null">
+            `password` = #{password},
+        </if>
+        <if test="#{truename} != null">
+            `trueName` = #{truename},
+        </if>
+        <if test="#{sex} != null">
+            `sex` = #{sex},
+        </if>
+        <if test="#{telephone} != null">
+            `telephone` = #{telephone},
+        </if>
+        <if test="#{birth} != null">
+            `birth` = #{birth},
+        </if>
+        <if test="#{balance} != null">
+            `balance` = #{balance},
+        </if>
+        <if test="#{regtime} != null">
+            `regtime` = #{regtime},
+        </if>
+        <if test="#{role} != null">
+            `role` = #{role}
+        </if>
+        WHERE `uid` = #{uid}
+    </update>
+    <update id="resetPwd">
+
+        UPDATE `zzx-data`.`tbl_user`
+        <if test="#{password} != null">
+            SET `password` = #{password},
+        </if>
+        WHERE `uid` = #{uid}
+    </update>
 </mapper>

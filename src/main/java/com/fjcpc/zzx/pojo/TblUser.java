@@ -1,61 +1,74 @@
-package generator.domain;
+package com.fjcpc.zzx.pojo;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * 
  * @TableName tbl_user
  */
+@ApiModel("用户实体类")
 public class TblUser implements Serializable {
     /**
      * 用户编号
      */
+    @ApiModelProperty("用户编号")
     private Object uid;
 
     /**
      * 用户名
      */
+    @ApiModelProperty("用户名")
     private String username;
 
     /**
      * 密码
      */
+    @ApiModelProperty("密码")
     private String password;
 
     /**
-     * 
+     * 真实姓名
      */
+    @ApiModelProperty("真实姓名")
     private String truename;
 
     /**
      * 性别
      */
+    @ApiModelProperty("性别")
     private String sex;
 
     /**
      * 电话，手机11，座机13
      */
+    @ApiModelProperty("电话")
     private String telephone;
 
     /**
      * 出生日期
      */
+    @ApiModelProperty("手机11")
     private String birth;
 
     /**
      * 余额
      */
+    @ApiModelProperty("座机13")
     private Double balance;
 
     /**
      * 用户权限，0为管理员，1为一般用户
      */
+    @ApiModelProperty("出生日期")
     private Integer role;
 
     /**
      * 注册时间，默认值，系统意见
      */
+    @ApiModelProperty("余额")
     private byte[] regtime;
 
     private static final long serialVersionUID = 1L;
@@ -103,14 +116,14 @@ public class TblUser implements Serializable {
     }
 
     /**
-     * 
+     *
      */
     public String getTruename() {
         return truename;
     }
 
     /**
-     * 
+     *
      */
     public void setTruename(String truename) {
         this.truename = truename;
@@ -213,15 +226,15 @@ public class TblUser implements Serializable {
         }
         TblUser other = (TblUser) that;
         return (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
-            && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getTruename() == null ? other.getTruename() == null : this.getTruename().equals(other.getTruename()))
-            && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
-            && (this.getTelephone() == null ? other.getTelephone() == null : this.getTelephone().equals(other.getTelephone()))
-            && (this.getBirth() == null ? other.getBirth() == null : this.getBirth().equals(other.getBirth()))
-            && (this.getBalance() == null ? other.getBalance() == null : this.getBalance().equals(other.getBalance()))
-            && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
-            && (Arrays.equals(this.getRegtime(), other.getRegtime()));
+                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
+                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
+                && (this.getTruename() == null ? other.getTruename() == null : this.getTruename().equals(other.getTruename()))
+                && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
+                && (this.getTelephone() == null ? other.getTelephone() == null : this.getTelephone().equals(other.getTelephone()))
+                && (this.getBirth() == null ? other.getBirth() == null : this.getBirth().equals(other.getBirth()))
+                && (this.getBalance() == null ? other.getBalance() == null : this.getBalance().equals(other.getBalance()))
+                && (this.getRole() == null ? other.getRole() == null : this.getRole().equals(other.getRole()))
+                && (Arrays.equals(this.getRegtime(), other.getRegtime()));
     }
 
     @Override

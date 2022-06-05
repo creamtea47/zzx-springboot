@@ -1,4 +1,4 @@
-package com.example.springboothelloworld.config;
+package com.fjcpc.zzx.common;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -21,7 +21,7 @@ public class JacksonConfig {
     @Bean
     @Primary
     @ConditionalOnMissingBean(ObjectMapper.class)
-    public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder){
+    public ObjectMapper jacksonObjectMapper(Jackson2ObjectMapperBuilder builder) {
         ObjectMapper objectMapper = builder.createXmlMapper(false).build();
         objectMapper.getSerializerProvider().setNullValueSerializer(new JsonSerializer<Object>() {
             @Override
@@ -32,4 +32,5 @@ public class JacksonConfig {
         });
         return objectMapper;
     }
+
 }
