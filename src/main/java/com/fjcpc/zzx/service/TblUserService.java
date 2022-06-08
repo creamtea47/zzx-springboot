@@ -1,6 +1,8 @@
 package com.fjcpc.zzx.service;
 
 import com.fjcpc.zzx.pojo.TblUser;
+import com.fjcpc.zzx.pojo.vo.ResetPwd;
+import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 
 /***
  * @author xiaolu LuAng
@@ -15,9 +17,10 @@ public interface TblUserService {
 
     TblUser getInfoByUid(String uid);
 
-    TblUser delUserByUid(int uid);
+    int delUserByUid(int uid);
 
-    int updateInfo(TblUser tblUser);
+    int updateInfo(UpdateInfo updateInfo);
 
-    int resetPwd(TblUser tblUser);
+    int resetPwd(ResetPwd resetPwd);
+
 }

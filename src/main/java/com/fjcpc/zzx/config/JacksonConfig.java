@@ -1,4 +1,4 @@
-package com.fjcpc.zzx.common;
+package com.fjcpc.zzx.config;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

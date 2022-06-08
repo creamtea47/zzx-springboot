@@ -1,33 +1,23 @@
-package com.fjcpc.zzx.pojo;
+package com.fjcpc.zzx.pojo.vo;
 
+import com.fjcpc.zzx.pojo.TblUser;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
  * @TableName tbl_user
  */
 @ApiModel("用户实体类")
-public class TblUser implements Serializable {
+public class UpdateInfo implements Serializable {
     /**
      * 用户编号
      */
+    @NotNull
     @ApiModelProperty("用户编号")
     private Object uid;
-
-    /**
-     * 用户名
-     */
-    @ApiModelProperty("用户名")
-    private String username;
-
-    /**
-     * 密码
-     */
-
-    @ApiModelProperty("密码")
-    private String password;
 
     /**
      * 真实姓名
@@ -50,7 +40,7 @@ public class TblUser implements Serializable {
     /**
      * 出生日期
      */
-    @ApiModelProperty("出生日前")
+    @ApiModelProperty("出生日期")
     private String birth;
 
     /**
@@ -87,33 +77,6 @@ public class TblUser implements Serializable {
         this.uid = uid;
     }
 
-    /**
-     * 用户名
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * 用户名
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     * 密码
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 密码
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     /**
      * 真实姓名
@@ -226,8 +189,6 @@ public class TblUser implements Serializable {
         }
         TblUser other = (TblUser) that;
         return (this.getUid() == null ? other.getUid() == null : this.getUid().equals(other.getUid()))
-                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
                 && (this.getTruename() == null ? other.getTruename() == null : this.getTruename().equals(other.getTruename()))
                 && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
                 && (this.getTelephone() == null ? other.getTelephone() == null : this.getTelephone().equals(other.getTelephone()))
@@ -242,8 +203,6 @@ public class TblUser implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getUid() == null) ? 0 : getUid().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
         result = prime * result + ((getTruename() == null) ? 0 : getTruename().hashCode());
         result = prime * result + ((getSex() == null) ? 0 : getSex().hashCode());
         result = prime * result + ((getTelephone() == null) ? 0 : getTelephone().hashCode());
@@ -261,8 +220,6 @@ public class TblUser implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", uid=").append(uid);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
         sb.append(", truename=").append(truename);
         sb.append(", sex=").append(sex);
         sb.append(", telephone=").append(telephone);
@@ -274,4 +231,5 @@ public class TblUser implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
 }

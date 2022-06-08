@@ -1,6 +1,7 @@
 package com.fjcpc.zzx.common;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 /*** 封装统一返回的json数据结构
  * @author xiaolu LuAng
@@ -9,8 +10,10 @@ import java.time.LocalDateTime;
 public class JsonResult<T> {
 
     private int code;
+    private Boolean success;
     private String message;
     private T data;
+
     private LocalDateTime time;
 
     /**
@@ -29,6 +32,9 @@ public class JsonResult<T> {
         return new JsonResult<T>();
     }
 
+    public static JsonResult success(HashMap<String, Object> map) {
+        return new JsonResult(map);
+    }
 
     /**
      * 失败时调用
@@ -43,35 +49,39 @@ public class JsonResult<T> {
 
     /**
      * 构造方法私有化，不允许外部new JsonResult
-     *
-     * @param data
      */
+    public JsonResult() {
+        this.code = 200;
+        this.success = true;
+        this.message = "操作成功！";
+        this.time = LocalDateTime.now();
+    }
+
     private JsonResult(T data) {
         this.code = 200;
+        this.success = true;
         this.message = "操作成功！";
         this.data = data;
         this.time = LocalDateTime.now();
     }
 
-    public JsonResult() {
-        this.code = 200;
-        this.message = "操作成功！";
-        this.time = LocalDateTime.now();
-    }
 
     /**
      * 构造方法私有化，不允许外部new JsonResult
      *
      * @param codeMsg
      */
+
     private JsonResult(CodeMsg codeMsg) {
         if (null == codeMsg) {
             return;
         }
         this.code = codeMsg.getCode();
         this.message = codeMsg.getMessage();
+        this.success = false;
         this.time = LocalDateTime.now();
     }
+
 
     public int getCode() {
         return code;
@@ -103,5 +113,13 @@ public class JsonResult<T> {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
     }
 }

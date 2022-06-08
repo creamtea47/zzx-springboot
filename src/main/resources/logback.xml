@@ -8,7 +8,8 @@
         %msg 表示日志消息
         %n 是换行符。
     -->
-    <property name="LOG_PATTERN" value="%magenta(%date{yyyy-MM-dd HH:mm:ss}) 🚧 %highlight(%-5level)📦 %yellow([%t]) %green(%logger:%line) 🎯 %white(%msg) 📍%cyan([%L]%n)"/>
+    <property name="LOG_PATTERN"
+              value="%magenta(%date{yyyy-MM-dd HH:mm:ss}) 🚧 %highlight(%-5level)📦 %yellow([%t]) %green(%logger:%line) 🎯 %white(%msg) 📍%cyan([%L]%n)"/>
     <property name="FILE_PATH"
               value="/Users/xiaolu/Desktop/Projects/Spring Boot/spring-boot-helloworld/logs/%d{yyyy-MM-dd}.%i.log"/>
 

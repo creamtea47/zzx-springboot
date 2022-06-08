@@ -2,6 +2,8 @@ package com.fjcpc.zzx.service.impl;
 
 import com.fjcpc.zzx.mapper.TblUserMapper;
 import com.fjcpc.zzx.pojo.TblUser;
+import com.fjcpc.zzx.pojo.vo.ResetPwd;
+import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 import com.fjcpc.zzx.service.TblUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,17 +39,18 @@ public class TblUserServiceImpl implements TblUserService {
     }
 
     @Override
-    public TblUser delUserByUid(int uid) {
+    public int delUserByUid(int uid) {
         return tblUserMapper.delUserByUid(uid);
     }
 
     @Override
-    public int updateInfo(TblUser tblUser) {
-        return tblUserMapper.updateInfo(tblUser);
+    public int updateInfo(UpdateInfo updateInfo) {
+        return tblUserMapper.updateInfo(updateInfo);
     }
 
     @Override
-    public int resetPwd(TblUser tblUser) {
-        return tblUserMapper.resetPwd(tblUser);
+    public int resetPwd(ResetPwd resetPwd) {
+        return tblUserMapper.resetPwd(resetPwd);
     }
+
 }

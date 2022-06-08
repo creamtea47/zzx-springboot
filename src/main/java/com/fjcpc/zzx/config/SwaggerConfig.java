@@ -1,5 +1,6 @@
 package com.fjcpc.zzx.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -36,6 +37,9 @@ public class SwaggerConfig {
                 // ant(final String antPattern):匹配Ant样式的路径模式
                 // regex(final String pathRegex):匹配正则指定的正则表达式路径}|
                 .paths(PathSelectors.any())
+
+//                .securityContexts(securityContexts())
+//                .securitySchemes(securitySchemes())
                 // 构建
                 .build();
     }
@@ -53,7 +57,8 @@ public class SwaggerConfig {
                 // 设置联系方式
 //                .contact("FJCPC")
                 .contact(new Contact("FJCPC", "fjcpc.edu.com", "fjcpc@edu.com"))
-                .version("1.1")
+                .version("1.0.3")
                 .build();
     }
+
 }

@@ -10,5 +10,5 @@ mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml # mapper映射文件的路径
   configuration:
     map-underscore-to-camel-case: true # 驼峰命名规范
-  type-aliases-package: com.example.springboothelloworld.pojo # 指定别名设置的包为所有的pojo
+  type-aliases-package: com.fjcpc.zzx.pojo # 指定别名设置的包为所有的pojo
 

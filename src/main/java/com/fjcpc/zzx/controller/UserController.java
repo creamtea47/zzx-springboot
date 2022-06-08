@@ -4,7 +4,9 @@ import com.fjcpc.zzx.common.CodeMsg;
 import com.fjcpc.zzx.common.JsonResult;
 import com.fjcpc.zzx.pojo.TblUser;
 import com.fjcpc.zzx.pojo.vo.ResetPwd;
+import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 import com.fjcpc.zzx.service.TblUserService;
+import com.fjcpc.zzx.util.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 
 /*** 用户控制层
  * @author xiaolu LuAng
@@ -23,6 +26,7 @@ import javax.annotation.Resource;
 @RequestMapping("/user")
 public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private String loginToken;
     @Resource
     private TblUserService tblUserService;
 
@@ -35,20 +39,27 @@ public class UserController {
         if (login == null) {
             return JsonResult.error(CodeMsg.AUTHENTICATION_ERROR);
         } else {
-            return JsonResult.success();
+            // TODO: 2022/6/7 登录接口生成token
+            HashMap<String, Object> map = new HashMap<>();
+            loginToken = TokenUtil.createToken(tblUser);
+            map.put("token", loginToken);
+            map.put("expires_time", TokenUtil.getTokenInfo(loginToken).getExpiresAt());
+            return JsonResult.success(map);
         }
     }
 
     @PostMapping("/register")
     @ApiOperation("用户注册接口")
     public JsonResult<TblUser> register(@RequestBody TblUser tblUser) {
-        try {
+        JsonResult<TblUser> infoByUsername = getInfoByUsername(tblUser.getUsername());
+        LOGGER.debug("检查用户名重复 => {}", infoByUsername.getCode());
+        if (infoByUsername.getCode() != 200) {
             TblUser register = tblUserService.register(tblUser);
             LOGGER.debug("接收：" + String.valueOf(tblUser));
             LOGGER.debug("结果：" + String.valueOf(register));
             return JsonResult.success();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } else {
+            return JsonResult.error(CodeMsg.ACCOUNT_ALREADY_EXISTS);
         }
     }
 
@@ -59,7 +70,7 @@ public class UserController {
         LOGGER.debug("接收：" + String.valueOf(username));
         LOGGER.debug("结果：" + String.valueOf(info));
         if (info == null) {
-            return JsonResult.error(CodeMsg.NO_DATA_ERROR);
+            return JsonResult.error(CodeMsg.ACCOUNT_DOES_NOT_EXIST);
         } else {
             return JsonResult.success(info);
         }
@@ -72,7 +83,7 @@ public class UserController {
         LOGGER.debug("接收：" + String.valueOf(uid));
         LOGGER.debug("结果：" + String.valueOf(infoByUid));
         if (infoByUid == null) {
-            return JsonResult.error(CodeMsg.NO_DATA_ERROR);
+            return JsonResult.error(CodeMsg.ACCOUNT_DOES_NOT_EXIST);
         } else {
             return JsonResult.success(infoByUid);
         }
@@ -81,45 +92,52 @@ public class UserController {
     @DeleteMapping("/deleteUserByUid/{uid}")
     @ApiOperation("根据uid删除某个用户")
     public JsonResult<TblUser> delUserByUid(@ApiParam("用户名") @PathVariable int uid) {
-        TblUser tblUser = tblUserService.delUserByUid(uid);
+        int i = tblUserService.delUserByUid(uid);
         LOGGER.debug("接收：" + String.valueOf(uid));
-        LOGGER.debug("结果：" + String.valueOf(tblUser));
-//        if (tblUser == null) {
-//            return JsonResult.error(CodeMsg.NO_DATA_ERROR);
-//        } else {
-//            return JsonResult.success(tblUser);
-//        }
-        // FIXME: 2022/6/1 无论如何都异常，但是能删除成功
-        return JsonResult.success(null);
+        LOGGER.debug("结果：" + String.valueOf(i));
+        if (i == 0) {
+            return JsonResult.error(CodeMsg.ACCOUNT_DOES_NOT_EXIST);
+        } else {
+            return JsonResult.success(null);
+        }
     }
 
     @PutMapping("/updateInfo")
     @ApiOperation("根据uid修改个人基本信息")
-    public JsonResult<TblUser> updateInfo(@RequestBody TblUser tblUser) {
-        int tblUser1 = tblUserService.updateInfo(tblUser);
-        LOGGER.debug("接收：" + String.valueOf(tblUser));
-        LOGGER.debug("结果：" + String.valueOf(tblUser1));
-        return JsonResult.success();
+    public JsonResult<TblUser> updateInfo(@RequestBody UpdateInfo updateInfo) {
+        int i = tblUserService.updateInfo(updateInfo);
+        LOGGER.debug("接收：" + updateInfo);
+        LOGGER.debug("结果：" + i);
+        if (i == 0) {
+            return JsonResult.error(CodeMsg.ACCOUNT_DOES_NOT_EXIST);
+        } else {
+            return JsonResult.success(null);
+        }
     }
 
     @PutMapping("/resetPwd")
     @ApiOperation("根据uid修改个人密码")
-    public JsonResult<TblUser> resetPwd(@PathVariable("id") int id, @RequestBody ResetPwd resetPwd) {
-//        int i = tblUserService.resetPwd(resetPwd);
-//        LOGGER.debug("接收：" + String.valueOf(tblUser));
-//        LOGGER.debug("结果：" + String.valueOf(tblUser1));
-        return null;
+    public JsonResult<TblUser> resetPwd(@RequestBody ResetPwd resetPwd) {
+        LOGGER.debug("接收：" + String.valueOf(resetPwd));
+        LOGGER.debug("接收 => 旧密码：{},新密码：{}", resetPwd.getOldPassword(), resetPwd.getNewPassword());
+        if (resetPwd.getNewPassword() != resetPwd.getOldPassword()) {
+            int i = tblUserService.resetPwd(resetPwd);
+            LOGGER.debug("结果：" + String.valueOf(i));
+            return JsonResult.success();
+        } else {
+            return JsonResult.error(CodeMsg.OLD_AND_NEW_PASSWORDS_DUPLICATE);
+        }
     }
 
-    @GetMapping("/balanceList")
-    @ApiOperation("金额变动记录")
-    public JsonResult<TblUser> balanceList() {
-        return null;
-    }
+//    @GetMapping("/balanceList")
+//    @ApiOperation("金额变动记录")
+//    public JsonResult<TblUser> balanceList() {
+//        return null;
+//    }
 
-    @PostMapping("/balanceRecharge")
-    @ApiOperation("金额充值")
-    public JsonResult<TblUser> balanceRecharge() {
-        return null;
-    }
+//    @PostMapping("/balanceRecharge")
+//    @ApiOperation("金额充值")
+//    public JsonResult<TblUser> balanceRecharge() {
+//        return null;
+//    }
 }
