@@ -1,7 +1,7 @@
 package com.fjcpc.zzx.controller;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.fjcpc.zzx.common.JsonResult;
+import com.fjcpc.zzx.common.FwResult;
 import com.fjcpc.zzx.util.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,17 +24,17 @@ public class TestController {
 
     @ApiOperation("测试验证Token")
     @PostMapping("/verifyToken")
-    public JsonResult verifyToken(@RequestHeader String token) {
+    public FwResult<DecodedJWT> verifyToken(@RequestHeader String token) {
         LOGGER.debug(token);
         DecodedJWT verify = TokenUtil.verify(token);
-        return JsonResult.success(verify);
+        return FwResult.ok(verify);
     }
 
     @ApiOperation("测试解析Token")
     @PostMapping("/getTokenInfo")
-    public JsonResult getTokenInfo(@RequestHeader String token) {
+    public FwResult<DecodedJWT> getTokenInfo(@RequestHeader String token) {
         LOGGER.debug(token);
         DecodedJWT tokenInfo = TokenUtil.getTokenInfo(token);
-        return JsonResult.success(tokenInfo);
+        return FwResult.ok(tokenInfo);
     }
 }

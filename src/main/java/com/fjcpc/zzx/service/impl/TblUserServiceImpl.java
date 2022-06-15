@@ -2,6 +2,7 @@ package com.fjcpc.zzx.service.impl;
 
 import com.fjcpc.zzx.mapper.TblUserMapper;
 import com.fjcpc.zzx.pojo.TblUser;
+import com.fjcpc.zzx.pojo.vo.Register;
 import com.fjcpc.zzx.pojo.vo.ResetPwd;
 import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 import com.fjcpc.zzx.service.TblUserService;
@@ -24,8 +25,8 @@ public class TblUserServiceImpl implements TblUserService {
     }
 
     @Override
-    public TblUser register(TblUser tblUser) {
-        return tblUserMapper.register(tblUser);
+    public TblUser register(Register register) {
+        return tblUserMapper.register(register);
     }
 
     @Override

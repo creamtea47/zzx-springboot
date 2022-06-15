@@ -1,6 +1,7 @@
 package com.fjcpc.zzx.mapper;
 
 import com.fjcpc.zzx.pojo.TblUser;
+import com.fjcpc.zzx.pojo.vo.Register;
 import com.fjcpc.zzx.pojo.vo.ResetPwd;
 import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TblUserMapper {
     TblUser login(TblUser tblUser);
 
-    TblUser register(TblUser tblUser);
+    TblUser register(Register register);
 
     TblUser getInfoByUsername(String username);
 
