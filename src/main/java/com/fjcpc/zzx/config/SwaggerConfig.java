@@ -51,13 +51,17 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 设置页面标题
-                .title("Spring Boot 2.7.0 接口总览")
+                .title("Spring Boot 2.7.0-EAP 接口总览")
                 // 设置接口描述
                 .description("Scan path:com.fjcpc.zzx.controller")
+                // 服务条款 Url
+                .termsOfServiceUrl("https://github.com")
+                //
+                .license("MIT")
+                .licenseUrl("https://github.com")
                 // 设置联系方式
-//                .contact("FJCPC")
                 .contact(new Contact("FJCPC", "fjcpc.edu.com", "fjcpc@edu.com"))
-                .version("1.0.3")
+                .version(ApplicationConfig.VERSION)
                 .build();
     }
 
