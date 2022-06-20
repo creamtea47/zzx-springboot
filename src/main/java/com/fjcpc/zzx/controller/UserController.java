@@ -29,6 +29,7 @@ import java.util.List;
 public class UserController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
     private String loginToken;
+
     @Resource
     private TblUserService tblUserService;
 
@@ -56,10 +57,10 @@ public class UserController {
     @PostMapping("/register")
     @ApiOperation("用户注册接口")
     public FwResult<Object> register(@RequestBody Register register) {
-        FwResult<TblUser> infoByUsername = getInfoByUsername(register.getUsername());
+        FwResult<List<TblUser>> infoByUsername = getInfoByUsername(register.getUsername());
         LOGGER.debug("检查用户名重复 => {}", infoByUsername.getStatus());
         if (infoByUsername.getStatus() != 200) {
-           tblUserService.register(register);
+            tblUserService.register(register);
             LOGGER.debug("接收：" + String.valueOf(register));
             LOGGER.debug("结果：" + String.valueOf(register));
             return FwResult.ok();
@@ -70,14 +71,16 @@ public class UserController {
 
     @GetMapping("/getInfoByUsername/{username}")
     @ApiOperation("根据用户名查询某人信息")
-    public FwResult<TblUser> getInfoByUsername(@ApiParam("用户名") @PathVariable String username) {
+    public FwResult<List<TblUser>> getInfoByUsername(@ApiParam("用户名") @PathVariable String username) {
         TblUser info = tblUserService.getInfoByUsername(username);
         LOGGER.debug("接收：" + String.valueOf(username));
         LOGGER.debug("结果：" + String.valueOf(info));
         if (info == null) {
             return FwResult.failedMsg(500, "账号不存在！");
         } else {
-            return FwResult.ok(info);
+            List<TblUser> mapList=new ArrayList<>();
+            mapList.add(info);
+            return FwResult.ok(mapList);
         }
     }
 
@@ -90,7 +93,9 @@ public class UserController {
         if (infoByUid == null) {
             return FwResult.failedMsg(500, "账号不存在！");
         } else {
-            return FwResult.ok(infoByUid);
+            List<TblUser> mapList=new ArrayList<>();
+            mapList.add(infoByUid);
+            return FwResult.ok(mapList);
         }
     }
 

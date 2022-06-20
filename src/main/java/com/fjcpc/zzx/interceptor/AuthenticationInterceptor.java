@@ -28,7 +28,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         String token = httpServletRequest.getHeader("token");
         Map<String, Object> map = new HashMap<>();
         try {
-            //这里尽行token验证，捕获异常，正常的话也不需要处理，直接抛出异常，由统一异常处理类进行处理，然后返回给前端统一数据类型。
+            //这里进行token验证，捕获异常，正常的话也不需要处理，直接抛出异常，由统一异常处理类进行处理，然后返回给前端统一数据类型。
             TokenUtil.verify(token);
             return true;
         } catch (SignatureVerificationException e) {
@@ -49,7 +49,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             map.put("code", 500);
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("message", "token无效");
+            map.put("message", "此请求地址需要携带Token验证，请检查Token是否有效或存在！");
             map.put("code", 500);
         }
         //根据自己所需选择所需的异常处理
