@@ -46,7 +46,7 @@ public class UpdateInfo implements Serializable {
     /**
      * 余额
      */
-    @ApiModelProperty("座机13")
+    @ApiModelProperty("余额")
     private Double balance;
 
     /**

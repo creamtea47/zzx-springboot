@@ -46,6 +46,7 @@ public class UserController {
             // TODO: 2022/6/7 登录接口生成token
             loginToken = TokenUtil.createToken(tblUser);
             HashMap<String, Object> map = new HashMap<>();
+            map.put("uid", login.getUid());
             map.put("token", loginToken);
             map.put("expires_time", TokenUtil.getTokenInfo(loginToken).getExpiresAt());
             List<HashMap> mapList = new ArrayList<>();
@@ -78,7 +79,7 @@ public class UserController {
         if (info == null) {
             return FwResult.failedMsg(500, "账号不存在！");
         } else {
-            List<TblUser> mapList=new ArrayList<>();
+            List<TblUser> mapList = new ArrayList<>();
             mapList.add(info);
             return FwResult.ok(mapList);
         }
@@ -93,7 +94,7 @@ public class UserController {
         if (infoByUid == null) {
             return FwResult.failedMsg(500, "账号不存在！");
         } else {
-            List<TblUser> mapList=new ArrayList<>();
+            List<TblUser> mapList = new ArrayList<>();
             mapList.add(infoByUid);
             return FwResult.ok(mapList);
         }
