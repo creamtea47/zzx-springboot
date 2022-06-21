@@ -9,6 +9,8 @@ import com.fjcpc.zzx.service.TblUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /***
  * @author xiaolu LuAng
  * @create 2022-05-31 10:49
@@ -52,6 +54,11 @@ public class TblUserServiceImpl implements TblUserService {
     @Override
     public int resetPwd(ResetPwd resetPwd) {
         return tblUserMapper.resetPwd(resetPwd);
+    }
+
+    @Override
+    public List<TblUser> getAllUser() {
+        return tblUserMapper.getAllUser();
     }
 
 }

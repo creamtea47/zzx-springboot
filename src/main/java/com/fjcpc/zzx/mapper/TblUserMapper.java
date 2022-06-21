@@ -6,6 +6,8 @@ import com.fjcpc.zzx.pojo.vo.ResetPwd;
 import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @author xiaolu
  * @description 针对表【tbl_user】的数据库操作Mapper
@@ -27,4 +29,6 @@ public interface TblUserMapper {
     int updateInfo(UpdateInfo updateInfo);
 
     int resetPwd(ResetPwd resetPwd);
+
+    List<TblUser> getAllUser();
 }

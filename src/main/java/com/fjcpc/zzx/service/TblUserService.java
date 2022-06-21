@@ -5,6 +5,8 @@ import com.fjcpc.zzx.pojo.vo.Register;
 import com.fjcpc.zzx.pojo.vo.ResetPwd;
 import com.fjcpc.zzx.pojo.vo.UpdateInfo;
 
+import java.util.List;
+
 /***
  * @author xiaolu LuAng
  * @create 2022-05-31 10:49
@@ -24,4 +26,5 @@ public interface TblUserService {
 
     int resetPwd(ResetPwd resetPwd);
 
+    List<TblUser> getAllUser();
 }

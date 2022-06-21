@@ -140,6 +140,14 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getAllUser")
+    @ApiOperation("获取所有用户")
+    public FwResult<List<TblUser>> getAllUser() {
+        List<TblUser> allUser = tblUserService.getAllUser();
+        return FwResult.ok(allUser);
+    }
+
+
 //    @GetMapping("/balanceList")
 //    @ApiOperation("金额变动记录")
 //    public JsonResult<TblUser> balanceList() {

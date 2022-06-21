@@ -50,6 +50,11 @@
         where uid = #{uid}
     </select>
 
+    <select id="getAllUser" resultType="com.fjcpc.zzx.pojo.TblUser">
+        select *
+        from `zzx-data`.`tbl_user`
+    </select>
+
     <delete id="delUserByUid">
         DELETE
         FROM tbl_user
