@@ -7,10 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /*** 测试控制器
  * @author xiaolu LuAng
@@ -36,5 +33,11 @@ public class TestController {
         LOGGER.debug(token);
         DecodedJWT tokenInfo = TokenUtil.getTokenInfo(token);
         return FwResult.ok(tokenInfo);
+    }
+
+    @ApiOperation("结束Spring Boot进程")
+    @GetMapping("/executeKill")
+    public void executeKill(){
+        System.exit(0);
     }
 }

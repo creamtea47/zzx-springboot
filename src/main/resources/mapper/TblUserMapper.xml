@@ -63,35 +63,35 @@
 
     <update id="updateInfo">
         UPDATE `zzx-data`.`tbl_user`
-        <if test="#{uid} != null">
+        <if test="uid != null">
             SET `uid` = #{uid},
         </if>
-        <if test="#{truename} != null">
+        <if test="truename != null">
             `trueName` = #{truename},
         </if>
-        <if test="#{sex} != null">
+        <if test="sex != null">
             `sex` = #{sex},
         </if>
-        <if test="#{telephone} != null">
+        <if test="telephone != null">
             `telephone` = #{telephone},
         </if>
-        <if test="#{birth} != null">
+        <if test="birth != null">
             `birth` = #{birth},
         </if>
-        <if test="#{balance} != null">
+        <if test="balance != null">
             `balance` = #{balance},
         </if>
-        <if test="#{regtime} != null">
+        <if test="regtime != null">
             `regtime` = #{regtime},
         </if>
-        <if test="#{role} != null">
+        <if test="role != null">
             `role` = #{role}
         </if>
         WHERE `uid` = #{uid}
     </update>
     <update id="resetPwd">
         UPDATE `zzx-data`.`tbl_user`
-        <if test="#{newPassword} != null">
+        <if test="newPassword != null">
             SET `password` = #{newPassword}
         </if>
         WHERE `uid` = #{uid}
